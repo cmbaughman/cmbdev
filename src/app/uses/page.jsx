@@ -49,15 +49,6 @@ export default function Uses() {
             quad-core 64bit ARM Cortex-A76 CPU, 8 GB RAM, and VideoCore VII GPU, supporting OpenGL ES 3.1, Vulkan 1.2.
             Super fun to do all sorts of projects with!
           </Tool>
-          <Tool title="Apple Magic Trackpad">
-            Something about all the gestures makes me feel like a wizard with
-            special powers. I really like feeling like a wizard with special
-            powers.
-          </Tool>
-          <Tool title="Herman Miller Aeron Chair">
-            If I&apos;m going to slouch in the worst ergonomic position imaginable
-            all day, I might as well do it in an expensive chair.
-          </Tool>
         </ToolsSection>
         <ToolsSection title="Development tools">
           <Tool title="Jetbrains IDEs">
