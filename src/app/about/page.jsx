@@ -76,7 +76,7 @@ export default function About() {
             <p>
               In 2003 I started freelancing under the name Baughman Consulting. This opened the way to learning
               about various aspects of technology. I did jobs for a large web hosting company, wrote
-              software for truckers to bid on various jobs faster, and even worked on early implementations of
+              software for truckers to bid on jobs faster, and even worked on early implementations of
               Build a Bear applications. Years later, I created custom Android builds (ROMs) for HTC, Motorola, and Google phones.
             </p>
             <p>
