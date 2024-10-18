@@ -270,7 +270,7 @@ export default async function Home() {
             Software developer, music aficionado, amateur astrophysicist
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I'm Chris, a software developer based in Harrisburg. I&apos;m a senior software developer with 20+ years of experience building
+            I&apos;m Chris, a software developer based in Harrisburg. I&apos;m a senior software developer with 20+ years of experience building
             and optimizing enterprise web applications. I specialize in creating robust, high-performance solutions with a focus on
             front-end excellence (responsive design, mobile optimization, accessibility, and SEO).  My expertise extends to database administration,
             system administration (Unix/Linux/Windows), and even custom Linux kernel development.
