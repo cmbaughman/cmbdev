@@ -1,0 +1,89 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import networkImage from './network-cables.jpg'
+
+export const article = {
+  author: 'Chris Baughman',
+  date: '2024-10-01',
+  title: 'How To Configure fail2ban',
+  description:
+    'Quick and dirty guide on how to install and configure fail2ban on Debian or Ubuntu Linux.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={networkImage} alt="Many cables plugged into a network switch." />
+*Image credit: Jordan Harrison [https://unsplash.com/@jouwdan](https://unsplash.com/@jouwdan)*
+
+Quick and dirty guide on how to install and configure fail2ban on Debian or Ubuntu Linux.
+
+## Install
+`sudo apt install fail2ban`
+
+## Activate the service (so that after reboot it runs)
+`sudo systemctl enable fail2ban.service`
+
+## Create
+`cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local`
+
+## Create a filter
+`nano /etc/fail2ban/filter.d/apache-custombots.conf`
+
+## Put in this:
+```
+# Block all malicious bots
+[Definition]
+custombots = SemrushBot|AhrefsBot|Mb2345Browser|MegaIndex\.ru|MJ12bot|DotBot|Baiduspider|YandexBot|LieBaoFast|zh_CN|zh-CN|SeznamBot|trendictionbot|magpie-crawler|python-requests
+failregex = ^<HOST> .*(GET|POST|HEAD).*(%(custombots)s).*$
+ignoreregex =
+datepattern = ^[^\[]*\[({DATE})
+{^LN-BEG}
+```
+
+## Update the jail.local with this at the end:
+```
+[apache-custombots]
+enabled   = true
+port      = http,https
+filter    = apache-custombots
+logpath   = %(apache_access_log)s
+findtime  = 3600
+maxretry  = 1
+bantime   = 24h
+```
+
+## Restart the service
+`sudo systemctl restart fail2ban`
+
+## Check the status
+`sudo systemctl status fail2ban.service`
+
+## Test your new filter:
+`fail2ban-regex /var/log/apache2/access.log /etc/fail2ban/filter.d/apache-custombots.conf`
+
+## if everything is working, put this in your ~/.bashrc file with aliases:
+```
+f2bstall() {
+JAILS=($(fail2ban-client status | grep "Jail list" | sed -E 's/^[^:]+:[ \t]+//' | sed 's/,//g'))
+for JAIL in ${JAILS[@]}
+do
+echo "--------------- 👀  JAIL STATUS: $JAIL ... ---------------"
+fail2ban-client status $JAIL
+echo "--------------- ... ---------------"
+done
+}
+```
+
+## Restart your shell:
+```
+source ~/.bashrc
+```
+
+## Now you can run this command which will give you status on how many you blocked.
+```
+f2bstall
+```

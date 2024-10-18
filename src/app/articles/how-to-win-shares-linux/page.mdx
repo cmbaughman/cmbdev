@@ -1,0 +1,55 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import terminalImage from './ubuntu-terminal.jpg'
+
+export const article = {
+  author: 'Chris Baughman',
+  date: '2023-06-01',
+  title: 'How To Use Windows Network Shares From Linux',
+  description:
+    'This is the fastest way to set up Windows network (AD) shares with Ubuntu using cifs-utils.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={terminalImage} alt="Ubuntu terminal prompt" />
+*Image credit: Gabriel Heinzer [https://unsplash.com/@6heinz3r](https://unsplash.com/@6heinz3r)*
+
+This is the fastest way to set up Windows network (AD) shares with Linux using `cifs-utils`
+
+## Setup
+
+1. `sudo apt update && sudo apt install cifs-utils -y`
+2. `sudo mkdir /mnt/win_share_name`
+3. Create a credentials file: `sudo nano /etc/win-credentials` and
+enter the following contents:
+```
+username=user
+password=password
+domain=domain
+```
+4. `sudo chown root: /etc/win-credentials`
+5. `sudo chmod 600 /etc/win-credentials`
+6. Now you should be able to test with:
+```
+sudo mount -t cifs -o credentials=/etc/win-credentials,uid=1000,gid=1000,dir_mode=0755,file_mode=0755 //machineNameOrIP/share_name /mnt/win_share_name
+```
+7. When you are done testing, unmout with: `sudo umount /mnt/win_share_name`
+
+## Set Up Auto Mounting
+
+Add the following to your /etc/fstab with `sudo nano /etc/fstab`:
+```
+//machineNameOrIP/share_name /mnt/win_share_name cifs credentials=/etc/win-credentials,file_mode=0755,dir_mode=0755 0  0
+```
+
+After a reboot, you should be able to simply run:
+`sudo mount /mnt/win_share_name`
+
+To unmount of course, use:
+`sudo umount /mnt/win_share_name`
+
