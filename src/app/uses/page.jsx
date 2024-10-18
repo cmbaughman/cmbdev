@@ -55,35 +55,35 @@ export default function Uses() {
             powers.
           </Tool>
           <Tool title="Herman Miller Aeron Chair">
-            If I’m going to slouch in the worst ergonomic position imaginable
+            If I&apos;m going to slouch in the worst ergonomic position imaginable
             all day, I might as well do it in an expensive chair.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Development tools">
           <Tool title="Jetbrains IDEs">
-            I don't care if it's IntelliJ, PHPStorm, DataGrip, or RustRover; Jetbrains makes an awesome IDE.
+            I don&apos;t care if it&apos;s IntelliJ, PHPStorm, DataGrip, or RustRover; Jetbrains makes an awesome IDE.
             They all have their shortcomings but the Jetbrains tools have proved to me to help me
             be incredibly productive debugging.
           </Tool>
           <Tool title="Warp Terminal">
-            I used to be an advocate for iTerm2 until I tried Warp. It's a phenomenal
+            I used to be an advocate for iTerm2 until I tried Warp. It&apos;s a phenomenal
             modern terminal that uses an LLM to help you remember commands. It works across platform
             and lets you do much more than the terminals of old.
           </Tool>
           <Tool title="VSCode">
-            Of course I also use VSCode for most front end and scripting work. It's keyboard shortcuts
+            Of course I also use VSCode for most front end and scripting work. It&apos;s keyboard shortcuts
             are incredibly useful and it has a full universe of plugins for everything you could ever want.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Productivity">
           <Tool title="Google Keep">
-            I use Google Keep so often that it's almost an extension of my brain. It helps me remember things,
+            I use Google Keep so often that it&apos;s almost an extension of my brain. It helps me remember things,
             and stay organized, without actually trying to be organized.
           </Tool>
           <Tool title="Asana">
             Asana is a great project management tool that can be adapted for any style that you
-            subscribe to. Super customizable and has everything. It's as close to Jira but more friendly
-            than I've been able to find.
+            subscribe to. Super customizable and has everything. It&apos;s as close to Jira but more friendly
+            than I&apos;ve been able to find.
           </Tool>
         </ToolsSection>
       </div>
