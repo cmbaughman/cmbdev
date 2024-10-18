@@ -38,11 +38,11 @@ export default function Uses() {
         <ToolsSection title="Workstation">
           <Tool title="16” MacBook Pro, i7 16GB RAM (2015)">
             I use an older Intel-based 16” MacBook Pro with Ubuntu Linux 24.04 installed.
-            I realize I should upgrade this, but it's comfortable at the moment.
+            I realize I should upgrade this, but it&apos;s comfortable at the moment.
           </Tool>
           <Tool title="WiFi Pineapple Mark V">
             This bad boy is essential for learning about WiFi networks and
-            securing them. It's a lot of fun at coffee shops.
+            securing them. It&apos;s a lot of fun at coffee shops.
           </Tool>
           <Tool title="RaspberryPi 5">
             The RaspberryPi 4 was when they really began to get usable. It has
