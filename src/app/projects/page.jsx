@@ -18,17 +18,17 @@ const projects = [
   },
   {
     name: 'cmbdev-fe-boilerplate',
-    description: 
+    description:
       'Quick and fairly opinionated boilerplate for my front end projects. Creates a static website minified, transpiled, and compressed.',
     link: { href: 'https://github.com/cmbaughman/cmbdev-fe-boilerplate', label: 'github.com/cmbaughman/cmbdev-fe-boilerplate' },
-    logo: logoJs,  
+    logo: logoJs,
   },
   {
     name: 'SQL2Knex',
-    description: 
+    description:
       'Create Knex seed files from existing databases.',
     link: { href: 'https://github.com/cmbaughman/SQL2Knex', label: 'github.com/cmbaughman/SQL2Knex' },
-    logo: logoSql2Knex,  
+    logo: logoSql2Knex,
   },
   {
     name: 'PACMan ROM',
@@ -41,7 +41,7 @@ const projects = [
     name: 'Android HTC Shooter Device Drivers',
     description:
       'Open source version of the HTC Shooter device drivers for use in Android projects.',
-    link: { href: 'https://github.com/cmartinbaughman/android_vendor_pac', label: 'github.com/cmartinbaughman/android_vendor_pac' },
+    link: { href: 'https://github.com/cmartinbaughman/android_vendor_pac', label: 'github.com/cmb/android_vendor_pac' },
     logo: logoShooter,
   },
   {
