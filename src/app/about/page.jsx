@@ -70,18 +70,18 @@ export default function About() {
             <p>
               The only thing I loved more than computers as a kid was space.
               I started collecting copies of all of the space agencies published pictures. Then I started
-              learning about how everything here came from up there. My interest in astrophysics developed to 
+              learning about how everything here came from up there. My interest in astrophysics developed to
               satisfy my curiousity of how everything works and fits together.
             </p>
             <p>
               In 2003 I started freelancing under the name Baughman Consulting. This opened the way to learning
-              about all sorts of aspects of technology. I did jobs for a large web hosting company, wrote
+              about various aspects of technology. I did jobs for a large web hosting company, wrote
               software for truckers to bid on various jobs faster, and even worked on early implementations of
               Build a Bear applications. Years later, I created custom Android builds (ROMs) for HTC, Motorola, and Google phones.
             </p>
             <p>
               Today, I write code for many different companies and try to solve their largest problems. I build various
-              equipment with Raspberry PIs, and explore radio frequencies with software defined radio. I have written 
+              equipment with Raspberry PIs, and explore radio frequencies with software defined radio. I have written
               large scale applications that are still in use all across the north American supply chain, and smaller scale
               financial applications for an insurance company. I love learning, and continue to create new things all the time.
             </p>
