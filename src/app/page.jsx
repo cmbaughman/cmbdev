@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
+import { Subscribe } from '@/components/Subscribe'
 import {
   GitHubIcon,
   InstagramIcon,
@@ -304,7 +305,7 @@ export default async function Home() {
             ))}
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
+            <Subscribe />
             <Resume />
           </div>
         </div>
