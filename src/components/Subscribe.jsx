@@ -15,6 +15,7 @@ export function Subscribe() {
     try {
       const response = await fetch('https://lokhd0x6o9.execute-api.us-east-1.amazonaws.com/default/cmbNinjaSubscribe', {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
