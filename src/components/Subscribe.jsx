@@ -4,7 +4,7 @@ import { Button } from '@/components/Button';
 import { MailIcon } from "./MailIcon";
 
 
-export async function Subscribe() {
+export function Subscribe() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
 
