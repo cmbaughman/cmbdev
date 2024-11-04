@@ -38,7 +38,7 @@ export default function Uses() {
         <ToolsSection title="Workstation">
           <Tool title="14” MacBook Pro M3">
             I finally broke down and got a new MacBook Pro with the ARM64 chipset by Apple.
-            It's a beautiful machine. The keyboard is way better than I could have hoped. Just feels
+            It&apos;s a beautiful machine. The keyboard is way better than I could have hoped. Just feels
             nice to code on. Super fast!
           </Tool>
           <Tool title="16” MacBook Pro, i7 16GB RAM (2015)">
