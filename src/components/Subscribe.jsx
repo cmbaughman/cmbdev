@@ -27,6 +27,7 @@ export function Subscribe() {
       }
       else {
         const errorData = await response.json();
+        console.log('response: ', response);
         setError(errorData.message || 'Error subscribing.');
       }
     }
