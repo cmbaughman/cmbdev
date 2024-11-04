@@ -22,14 +22,7 @@ export function Subscribe() {
         body: JSON.stringify({ email })
       });
 
-      if (response.ok) {
-        window.location.href = '/thank-you'
-      }
-      else {
-        const errorData = await response.json();
-        console.log('response: ', response);
-        setError(errorData.message || 'Error subscribing.');
-      }
+      window.location.href = '/thank-you';
     }
     catch(error) {
       setError('Error subscribing.');
