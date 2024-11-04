@@ -4,7 +4,7 @@ import { Button } from '@/components/Button';
 import { MailIcon } from "./MailIcon";
 
 
-export function Subscribe() {
+export async function Subscribe() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
 
@@ -19,7 +19,7 @@ export function Subscribe() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'email': email })
+        body: JSON.stringify({ email })
       });
 
       if (response.ok) {
