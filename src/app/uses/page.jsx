@@ -36,8 +36,13 @@ export default function Uses() {
     >
       <div className="space-y-20">
         <ToolsSection title="Workstation">
+          <Tool title="14” MacBook Pro M3">
+            I finally broke down and got a new MacBook Pro with the ARM64 chipset by Apple.
+            It's a beautiful machine. The keyboard is way better than I could have hoped. Just feels
+            nice to code on. Super fast!
+          </Tool>
           <Tool title="16” MacBook Pro, i7 16GB RAM (2015)">
-            I use an older Intel-based 16” MacBook Pro with Ubuntu Linux 24.04 installed.
+            Older Intel-based 16” MacBook Pro with Ubuntu Linux 24.04 installed.
             I realize I should upgrade this, but it&apos;s comfortable at the moment.
           </Tool>
           <Tool title="WiFi Pineapple Mark V">
