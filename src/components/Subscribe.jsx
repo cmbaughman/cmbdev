@@ -22,6 +22,7 @@ export function Subscribe() {
         body: JSON.stringify({ email })
       });
 
+      console.log('test:', JSON.stringify({ email }));
       if (response.ok) {
         window.location.href = '/thank-you'
       }
