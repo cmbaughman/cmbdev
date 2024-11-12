@@ -1,0 +1,77 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import cobolImage from './Heckert_GNU_white.svg.png'
+
+export const article = {
+  author: 'Chris Baughman',
+  date: '2024-11-11',
+  title: 'Install GnuCOBOL on Mac M3',
+  description:
+    'Installing GnuCOBOL on Mac M3 for educational purposes.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={mysqlImage} alt="MySQL logo on a block." />
+*Image credit: GnuCOBOL*
+
+
+## Overview
+
+COBOL mainly runs on mainframes and systems that you will not be able to easily access. In this short tutorial
+I&apos;ll show you how I installed it on Mac and learned the fundamentals.
+
+## Step 1: Get Homebrew if you do not already have it.
+Run this command in your terminal of choice. You will be prompted for your password.
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+## Step 2: Use Homebrew to install GnuCOBOL
+```
+brew install gnucobol
+```
+
+## Step 3: Install the OpenCOBOLIDE
+
+This app is incredibly buggy. I have had to force quit it several times, and eventually just used VSCode and
+the command line to compile and run. I am including it here anyway.
+```
+pip3 install PyQt5
+pip3 install OpenCobolIDE --upgrade
+```
+*NOTE: Yes, you will need the `--upgrade` part.*
+
+## Step 4: Optionally install the `learncobol` addon in VSCode
+
+If you are using VSCode, a nice way to learn is with the `learncobol` addon. Go to
+(https://www.rocketsoftware.com/learn-cobol)[https://www.rocketsoftware.com/learn-cobol] and register for their learn COBOL
+tutorials. But be forwarned: their compiler does not work well on Mac, but the combo of the `learncobol` VSCode addon and
+OpenCobolIDE works well to learn COBOL.
+
+## Step 5: Compile and run the obligatory "Hello World" application
+
+A good way to make sure you have everything set up correctly is to compile and run the familiar "Hello World" application.
+Open an editor and put this in matching the format as best as you can:
+
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO-WORLD.
+       DATA DIVISION.
+       FILE SECTION.
+       WORKING-STORAGE SECTION.
+       PROCEDURE DIVISION.
+       MAIN-PROCEDURE.
+            DISPLAY "Hello world"
+            STOP RUN.
+```
+
+You actually need all those spaces, (not tabs). COBOL division and section headers, paragraph headers, level indicators,
+declaratives, and end declaratives need to start in the 8th-11th column. Everything you learn here can be applied to most
+of the COBOL dialects that you will encounter.
+
+Enjoy!
