@@ -74,4 +74,14 @@ You actually need all those spaces, (not tabs). COBOL division and section heade
 declaratives, and end declaratives need to start in the 8th-11th column. Everything you learn here can be applied to most
 of the COBOL dialects that you will encounter.
 
+Once you have that saved in a file called `hello.cbl` or something, open a terminal to that directory, and input
+the following:
+
+```
+cobc -x -o hello-world ./hello.cbl
+```
+
+The `-x` tells the COBOL compiler you want to build an executable, the `-o` tells it to output the executable as `hello-world`.
+Once that is done you should be able to run the new executable with `./hello-world` and that is it.
+
 Enjoy!
