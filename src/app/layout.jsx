@@ -1,6 +1,6 @@
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
-import { SpeedInsights } from '@vercel/speed-insights'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import '@/styles/tailwind.css'
 
