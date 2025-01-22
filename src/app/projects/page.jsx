@@ -10,6 +10,13 @@ import logoSql2Knex from '@/images/cmb/sql2knex.jpg'
 
 const projects = [
   {
+    name: 'cmbdev-react-hooks',
+    description:
+      'Curated list of React hooks that I have used in some of my projects.',
+    link: { href: 'https://github.com/cmbaughman/cmbdev-react-hooks', label: 'github.com/cmbaughman/cmbdev-react-hooks' },
+    logo: logoJs,
+  },
+  {
     name: 'cmbutil',
     description:
       'Convenience class for Javascript projects written in vanilla js.',
