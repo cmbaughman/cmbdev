@@ -1,0 +1,232 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import zapImage from './owasp_zap_logo.png'
+import Image from 'next/image'
+
+export const article = {
+  author: 'Chris Baughman',
+  date: '2025-01-29',
+  title: 'Automated DAST Testing in CI/CD Environments with OWASP ZAP',
+  description:
+    'Automated DAST Testing in CI/CD Environments with OWASP ZAP: A Comprehensive Guide',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<div className="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+  <Image src={zapImage}
+         className="object-cover object-center rounded-lg mx-auto"
+         width={350}
+         height={350}
+         alt="OWASP ZAP Vulnerability Penetration test Proxy server" />
+</div>
+
+Dynamic Application Security Testing (DAST) is a vital practice for identifying vulnerabilities
+in web applications by simulating real-world attacks. Automating DAST within your CI/CD pipeline ensures
+that security testing is performed consistently and efficiently throughout the software development lifecycle.
+This article will guide you through implementing automated DAST in your CI/CD environment, with a
+focus on leveraging the powerful and popular open-source tool, OWASP ZAP.
+
+## 1. Choosing Your DAST Tool: The Power of OWASP ZAP
+
+[OWASP ZAP](https://www.zaproxy.org/) (Zed Attack Proxy) is a free, open-source tool that stands out as a particularly strong choice for
+integrating into CI/CD pipelines.
+
+### Why OWASP ZAP?
+
+Open Source and Free: Being open-source, ZAP is freely available and benefits from a large and active community,
+ensuring continuous development and support.
+
+- **Feature-Rich**: ZAP offers a wide range of features, including automated scanning, spidering, a proxy server,
+and scripting capabilities.
+- **CI/CD Friendly**: ZAP provides robust command-line options, making it ideal for integration into automated workflows.
+It can also be run within a Docker container, simplifying deployment and management within your CI/CD environment.
+- **Automation Capabilities**: ZAP includes a powerful API and supports various scripting languages (such as Python or JavaScript)
+enabling you to customize and automate your scans.
+- **Extensive Documentation and Community Support**: ZAP boasts comprehensive documentation and a helpful community,
+making it easier to get started and resolve any issues. While other tools like
+[Codename SCNR](https://ecsypno.com/pages/codename-scnr) or enterprise-grade options like [Invicti](https://www.invicti.com/),
+[Acunetix](https://www.acunetix.com/), and [Burp Suite Professional](https://portswigger.net/burp/pro) are worth considering,
+ZAP's combination of features, ease of use, and open-source nature makes it a great fit for many teams implementing
+automated DAST.
+
+## 2. Integrating OWASP ZAP into Your CI/CD Pipeline
+
+Integrating ZAP into your CI/CD pipeline involves a few key steps:
+
+- **Select a CI/CD Platform**: Popular choices include Jenkins, GitLab CI/CD, GitHub Actions,
+Azure DevOps, and CircleCI. Select the platform that aligns best with your team's existing infrastructure and workflow.
+- **Installing and Configuring OWASP ZAP**: The recommended approach for CI/CD integration is to use
+the official [OWASP ZAP Docker](https://www.zaproxy.org/docs/docker/about/) image. This ensures consistency across environments
+and simplifies management. You can pull the stable or weekly image from Docker Hub and use it directly in your pipeline.
+- **Define a DAST Stage**: Create a dedicated stage within your CI/CD pipeline specifically for running ZAP.
+This stage should be positioned after your application has been built and deployed to a test environment.
+This guarantees that ZAP is testing a live, functioning instance of your application.
+
+## 3. Configuring Your ZAP Scan
+
+Properly configuring your ZAP scan is crucial to its effectiveness. ZAP offers various command-line
+options and API functionalities to customize your scans:
+
+- **Target URL**: Use the `-t` option to specify the target URL of your application in the test environment.
+- **Authentication**: ZAP provides multiple ways to handle authentication:
+  - Zest Scripts: You can record authentication sequences using ZAP's Zest scripting capabilities and replay them during the scan.
+  - Context Files: Define contexts within ZAP that include authentication details.
+  - Command-line options: Pass usernames and passwords directly (though less secure).
+- **Scan Scope**: Control which parts of your application are scanned.
+  - `-r` option: Generate a traditional spider report of the links found.
+  - `-d` option: Show the details of the scan.
+  - **Contexts**: Define contexts to include or exclude specific URLs or directories, refining the scan's focus.
+- **Scan Policy**: ZAP uses scan policies to define the types of attacks and vulnerabilities it checks for.
+  - `-x` option: Generates an XML report of the scan, including the scan policy details.
+  - **Pre-built policies**: The baseline scan policy is great for initial testing.
+  - **Custom policies**: You can create custom policies tailored to your application's risk profile.
+- **Scheduling**: Integrate ZAP into your CI/CD pipeline to run automatically. Trigger scans on every push to the main branch,
+on a nightly schedule, or based on your specific release cycle.
+
+## 4. Analyzing and Reporting on ZAP Results
+
+After the ZAP scan completes, you need to analyze the results and take action:
+
+- **Parse Results**: ZAP can generate reports in various formats, including XML, JSON, and HTML. Configure your
+pipeline to parse the chosen format and extract key data like vulnerability type, severity (High, Medium, Low),
+URL, and description. ZAP provides options to specify the report format using flags like -x (XML), -j (JSON), or -w (HTML).
+- **Fail the Build (Implement a Security Gate)**: Establish a clear security threshold. Configure your CI/CD
+pipeline to automatically fail the build if ZAP detects vulnerabilities exceeding a predefined severity
+level (e.g., any "High" severity issues). This creates a critical security checkpoint, preventing
+vulnerable code from moving forward.
+- **Generate Reports**: Use ZAP's built-in reporting features or CI/CD plugins to generate comprehensive reports.
+These reports should be easy for developers and security teams to understand, providing actionable insights for remediation.
+Integrate with issue trackers, and communication tools like Slack or email, to keep everyone informed.
+
+## Examples
+
+1. **AWS CodePipeline and CodeBuild with OWASP ZAP**:
+
+This is the AWS CodeBuild `buildspec.yml` file:
+
+```yaml
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Starting OWASP ZAP scan...
+      - docker pull owasp/zap2docker-stable
+      - docker run -t owasp/zap2docker-stable zap-baseline.py -t $TARGET_URL -r ZAP-Report.html
+  post_build:
+    commands:
+      - echo ZAP scan completed on `date`
+      - aws s3 cp ZAP-Report.html s3://$S3_BUCKET_NAME/
+      - echo Checking for critical vulnerabilities...
+      - |
+        if docker run -t owasp/zap2docker-stable zap-cli status -m 1 -a; then
+          echo "No High or Medium severity vulnerabilities found."
+        else
+          echo "High or Medium severity vulnerabilities found! Failing build."
+          exit 1
+        fi
+artifacts:
+  files:
+    - ZAP-Report.html
+```
+
+### Notes:
+- `pre_build`: Logs into Amazon ECR if you need to pull private images for your application.
+- `build`:
+  - Pulls the `owasp/zap2docker-stable` Docker image.
+  - Runs the `zap-baseline.py` script, which is included in the ZAP Docker image.
+  - `-t` $TARGET_URL: Specifies the target URL of your application. You would set `TARGET_URL` as an environment
+  variable in your CodeBuild project.
+  - `-r ZAP-Report.html`: Generates an HTML report named `ZAP-Report.html`
+- `post_build`:
+  - Uploads the report to an S3 bucket. You'll need to create an S3 bucket and replace `$S3_BUCKET_NAME` with your bucket name.
+  - Uses zap-cli status to check for alerts. `-m 1` checks for alerts of Medium severity or
+above and `-a` causes zap-cli to fail if alerts are found. This will fail the build if high or medium-severity issues are detected.
+- `artifacts`: Specifies that the `ZAP-Report.html` should be saved as a build artifact.
+
+**CodePipeline Configuration**:
+- **Source Stage**: Pulls the latest code from your repository.
+- **Build Stage**:
+  - Select AWS CodeBuild as the build provider.
+  - Create a new CodeBuild project or use an existing one.
+  - Configure the project to use the `buildspec.yml` file above.
+  - Set the `TARGET_URL` environment variable to the URL of your application in the test environment.
+  - Configure the build project to have access to your S3 bucket (use an IAM role).
+- **Deploy Stage**: Deploy to your test environment or whatever.
+
+2. **GitLab CI/CD with OWASP ZAP**:
+
+This goes in your `.gitlab-ci.yml` file:
+
+```yaml
+stages:
+  - build
+  - test
+  - dast
+
+variables:
+  TARGET_URL: "https://your-test-environment.com"
+
+build_job:
+  stage: build
+  script:
+    - echo "Building application..."
+    # Add your build commands
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests..."
+    # Add any other test commands
+
+dast:
+  stage: dast
+  image: owasp/zap2docker-stable
+  script:
+    - zap-baseline.py -t $TARGET_URL -r ZAP-Report.html
+    - |
+      if zap-cli status -m 1 -a; then
+        echo "No High or Medium vulnerabilities found."
+      else
+        echo "High or Medium vulnerabilities found! Failing build."
+        exit 1
+      fi
+  artifacts:
+    paths:
+      - ZAP-Report.html
+    reports:
+      dast: ZAP-Report.html
+```
+
+- **stages**: Defines the order of stages in the pipeline.
+- **variables**: Defines the `TARGET_URL` variable, replace with the URL of your application in its test environment.
+- **build_job and test_job**: These are here for illustration - you would use these to include your application's build and test steps.
+- **dast**:
+  - Uses the `owasp/zap2docker-stable` image.
+  - Runs `zap-baseline.py` with the target URL and generates an HTML report.
+  - Uses `zap-cli` status to check for alerts. `-m 1` checks for alerts of Medium severity or above and `-a` causes `zap-cli` to fail if alerts are found.
+- **artifacts**: is used to store the report, and make it accessible from the GitLab UI.
+
+### Considerations
+
+- If your app uses authentication, you may need to configure ZAP to handle it using context files, Zest scripts, or cli options.
+- If you need a more advanced scan, consider using the `zap-full-scan.py` script instead of `zap-baseline.py`.
+- Use environment variables to manage sensitive data like API keys.
+
+## Conclusion
+
+OWASP ZAP is a powerful and versatile tool for implementing automated DAST within your CI/CD pipeline.
+By integrating ZAP early and configuring it effectively, you can proactively identify and address vulnerabilities
+in your web applications before they reach production. Thereby reducing your security risk, improving your
+application's security posture, and helps you build more secure software. Remember that security is always about continuous improvement.
+Using OWASP ZAP in your CI/CD pipeline is a significant step toward achieving a more secure development lifecycle.
