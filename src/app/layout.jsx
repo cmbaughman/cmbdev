@@ -14,6 +14,7 @@ export const metadata = {
   description:
     'I\'m Chris, a software developer based in Harrisburg. I\'m a senior software developer with 20+ years of experience building and optimizing enterprise web applications. I specialize in creating robust, high-performance solutions with a focus on front-end excellence (responsive design, mobile optimization, accessibility, and SEO).  My expertise extends to database administration, system administration (Unix/Linux/Windows), and even custom Linux kernel development.',
   alternates: {
+    canonical: 'https://cmb.ninja/',
     types: {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
     },
